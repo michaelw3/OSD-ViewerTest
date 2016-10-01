@@ -21,16 +21,21 @@ var viewer = OpenSeadragon({
       previousButton:     "previousbttn",
       tileSources:        imgArr,
       sequenceMode:       true,
-      showReferenceStrip: true,
+      //showReferenceStrip: true,
       //prefixUrl: "/openseadragon/images/",
   });
+  //for thumbbar.js
+var thumbViewer = new OpenSeadragon.thumbbar({id: "thumbbar",
+    mainviewer : viewer,
+    position : "bottom",
+});
+var sumOfPages = imgArr.length;
+document.getElementById("currentpage").innerHTML = "1" + " of " + sumOfPages;
+//page handler
+viewer.addHandler("page", function (data) {
 
-  (function(){
-  viewer.addHandler("page", function (data) {
-      sumOfPages = imgArr.length;
       document.getElementById("currentpage").innerHTML = ( data.page + 1 ) + " of " + sumOfPages;
-  });
-})();
+});
 
 // toggle fullscreen
 toggleFullScreen = function(){
