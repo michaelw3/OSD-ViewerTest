@@ -25,7 +25,7 @@ var viewer = OpenSeadragon({
       //prefixUrl: "/openseadragon/images/",
   });
   //for thumbbar.js
-var thumbViewer = new OpenSeadragon.thumbbar({id: "thumbbar",
+var thumbViewer = new OpenSeadragon.Thumbbar({id: "thumbbar",
     mainviewer : viewer,
     position : "bottom",
 });
