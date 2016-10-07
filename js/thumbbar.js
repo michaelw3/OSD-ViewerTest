@@ -1,18 +1,5 @@
 (function($){
 
-  // if (!$.version || $.version.major < 2) {
-  //     throw new Error('This version of OpenSeadragonScalebar requires ' +
-  //             'OpenSeadragon version 2.0.0+');
-  // }
-  //
-  // $.prototype.thumbbar = function(options) {
-  //     if (!this.thumbbarInstance) {
-  //         options = options || {};
-  //         options.viewer = this;
-  //         this.thumbbarInstanceInstance = new $.Thumbbar(options);
-  //     } else {
-  //     }
-  // };
    $.Thumbbar = function(options){
       self = this;
       this.position = options.position;
@@ -25,47 +12,114 @@
       console.log(this.thumbviewerID);
 
       self.setPosition(this.position);
-      var thumbbarViever = new OpenSeadragon({
+      thumbbarViever = new OpenSeadragon({
         id : this.thumbviewerID,
-        minZoomLevel: 	1,
-        maxZoomLevel: 	1,
-        panVertical: true,
+        panVertical : false,
+        panHorizontal: true,
+        visibilityRatio: 1,
+        maxZoomLevel: 1,
         showNavigator:          false,
-        mouseNavEnabled:        false,
         showNavigationControl:  false,
-        showSequenceControl:    false,
+        constrainDuringPan: true,
       });
-      thumbbarViever.addTiledImage({
-          tileSource: this.imageSource,
-          x: 5,
-          y: 0,
-          width: 10
-      });
-    //  viewerDiv = document.getElementById(options.mainviewer.id);
-    //  console.log(viewerDiv);
-    //  mainBottom = this.getBottom(viewerDiv);
-    //  console.log("positon bottom of mainviewer = " + mainBottom);
+      thumbbarViever.canvas.style.backgroundColor = "#2D2D2D";
+      imgSrcLength = this.imageSource.length;
+      console.log(imgSrcLength);
+      for(i=0; i < imgSrcLength; i++){
+          console.log(this.imageSource[i]);
+        thumbbarViever.addTiledImage({
+            tileSource: this.imageSource[i],
+            index: i,
+            opacity : 1,
+             x: -i,
+             height: 1,
+        });
+      }
+      // var  tiledImage;
+      //thumbbarViever.open(this.imageSource);
+      // thumbbarViever.world.arrange({rows:1,
+      //   immediately : true,
+      //   layout : "horizontal",
+      // });
+      //thumbbarViever.world.draw();
+      thumbbarViever.innerTracker.scrollHandler=false;
+      var count = thumbbarViever.world.getItemCount();
+      console.log("Count = " + count);
+      // for (i = 0; i < count; i++) {
+      //   tiledImage = thumbbarViever.world.getItemAt(i);
+      //   tiledImage.setPosition(new OpenSeadragon.Point(i, 0));
+      // }
+      self.showControls();
+      thumbbarViever.addHandler('canvas-click', function(event) {
+          self.setImageMain(event);
+          if (!event.quick) {
+
+              return;
+          }
+        });
    }
    $.Thumbbar.prototype = {
-      getBottom : function(elem) {
-        var rect = elem.getBoundingClientRect();
-        return rect.bottom;
-      },
       setPosition : function(options){
         console.log(this.thumbbarDiv);
-        if(options === "bottom"){
-          leftTop = {x : this.mainViewerPosition.x , y : (this.mainViewerPosition + this.mainViewerSize.y)};
-          this.thumbbarDiv.style.width = this.mainViewerSize.x;
-          this.thumbbarDiv.style.height = "100px";
-          this.thumbbarDiv.style.position = "relative";
-          this.thumbbarDiv.style.top = leftTop.y;
-          this.thumbbarDiv.style.left = leftTop.x;
-          this.thumbbarDiv.style.backgroundColor = "green";
-          console.log(leftTop);
+        switch (options) {
+          case "bottom":
+            leftTop = {x : this.mainViewerPosition.x , y : (this.mainViewerPosition + this.mainViewerSize.y)};
+            this.thumbbarDiv.style.width = this.mainViewerSize.x;
+            this.thumbbarDiv.style.height = "100px";
+            this.thumbbarDiv.style.position = "relative";
+            this.thumbbarDiv.style.top = leftTop.y;
+            this.thumbbarDiv.style.left = leftTop.x;
+            console.log(leftTop);
+            break;
+          case "left":
+            break;
+          case "right":
+            break;
         }
-      }
+      },
+      showControls : function(){
+        width = "25px";
+        height = "100%";
+        //console.log("Viewer inside showControls : "+ thumbbarViever.element);
+        leftControlButton = $.makeNeutralElement("div");
+        this.thumbbarDiv.appendChild(leftControlButton);
+        leftControlButton.id = "thumbbarControlLeft";
+        leftControlButton.style.width = width;
+        leftControlButton.style.height = height;
+        leftControlButton.style.position = "absolute";
+        leftControlButton.style.top = 0;
+        leftControlButton.style.left = 0;
+        leftControlButton.style.backgroundColor = "rgba(233, 233, 233, 0.1)";
+        leftControlButton.style.zIndex = "99999";
+        leftControlArrow = $.makeNeutralElement("div");
+        leftControlButton.appendChild(leftControlArrow);
+      },
+      setImageMain : function(event){
+        console.log("inside setImageMain");
+        var index =   self.getImagePosition(thumbbarViever.viewport.pointFromPixel(event.position));
+        console.log("inside setImageMain index: " + index);
+        if (index !== -1) {
+            thumbbarViever.viewport.fitBounds(thumbbarViever.world.getItemAt(index).getBounds());
+            this.mainViewer.goToPage(index);
+        }
+      },
+      getImagePosition : function(position){
+        console.log("inside getImagePosition " + position);
+        var box;
+        var count = thumbbarViever.world.getItemCount();
+        for (var i = 0; i < count; i++) {
+            box = thumbbarViever.world.getItemAt(i).getBounds();
+            if (position.x > box.x &&
+                    position.y > box.y &&
+                    position.x < box.x + box.width &&
+                    position.y < box.y + box.height) {
+                        console.log("inside getImagePosition i =" + i);
+                return i;
+            }
+        }
 
-   }
-
+        return -1;
+      },
+  }
 
 })(OpenSeadragon);

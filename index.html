@@ -10,24 +10,27 @@
     #viewercontainer {width: 100%; height: 100%;}
     #viewerwrapper {width: 100%; height: 80%; position:relative; top:0;}
     #openseadragon {width:100%; height:100%; z-index: -1;}
-    #leftarrow {width:25px; height:90%; position: absolute; left: 0; top :0;z-index: 1;}
-    .sidenavwrapperleft{width:25px; height:90%; position: absolute; left: 0; top :0;}
+    #leftarrow {width:25px; height:100%; position: absolute; left: 0; top :0;z-index: 1;}
+    .sidenavwrapperleft{width:25px; height:100%; position: absolute; left: 0; top :0;}
     #leftarrow > img {width: 15px; position: absolute; top: 45%; left:3px; z-index: 999; }
     #rightarrow > img { width: 15px; position: absolute; top: 45%; right:3px; z-index: 999;}
-    #rightarrow {width:25px; height:90%; position: absolute; right:0; top :0;z-index: 1;}
-    .sidenavwrapperright{width:25px; height:90%; position: absolute; right:0; top :0;}
+    #rightarrow {width:25px; height:100%; position: absolute; right:0; top :0;z-index: 1;}
+    .sidenavwrapperright{width:25px; height:100%; position: absolute; right:0; top :0;}
     .sidenav {  cursor: pointer;
                 background-color: rgba(0, 0, 0, 0);
                 -webkit-transition: background-color 0.5s; /* Safari 3.1 to 6.0 */
                 transition: background-color 0.5s;}
     .sidenavwrapperleft:hover .sidenav, .sidenavwrapperright:hover .sidenav{background-color: rgba(44, 44, 44, 0.1); }
-    .sidenavimg {opacity:0.2;
+    .sidenavimg {opacity:0.3;
                 -webkit-transition: opacity 0.5s; /* Safari 3.1 to 6.0 */
                 transition: opacity 0.5s;}
     .sidenavwrapperleft:hover .sidenavimg, .sidenavwrapperright:hover .sidenavimg{opacity: 1;}
-    #navigationcontrol {direction:rtl; height:10%; }
-    #navigationcontrol ul {list-style: none}
-    ul li {display: inline; margin:10px; cursor: pointer; }
+    #navigationcontrol {direction:rtl; height:2em; background-color: #2D2D2D}
+    #navigationcontrol ul {list-style: none; margin: 0; padding: 0;}
+    ul li {display: inline; margin-right:0;color: white;
+    text-align: center;
+    padding: 0.3em 0.3em;
+    text-decoration: none; ;cursor: pointer; background-color: #898989}
     #currentpage{width: 100%; height: 10%; display: block;}
 </style>
 </head>
@@ -35,12 +38,12 @@
   <div id="viewercontainer">
     <nav id="navigationcontrol">
       <ul>
-        <li id="nextbttn">next</li>
-        <li id="previousbttn">prev</li>
-        <li id="zoominbttn">zoom in</li>
-        <li id="zoomoutbttn">zoom out</li>
-        <li id="fullscrnbttn">full screen</li>
-        <li id="homebttn">home</li>
+        <li id="previousbttn">PREV</li>
+        <li id="nextbttn">NEXT</li>
+        <li id="zoominbttn">ZOOM IN</li>
+        <li id="zoomoutbttn">ZOOM OUT</li>
+        <li id="fullscrnbttn">FULLSCREEN</li>
+        <li id="homebttn">HOME</li>
         <li><input id="jumptopage" name="jumptopage" placeholder="go to page"/><button type="button" id="jumptopagebutton">GO</button></li>
       </ul>
     </nav>
