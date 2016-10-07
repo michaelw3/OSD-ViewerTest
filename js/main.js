@@ -1,3 +1,4 @@
+var jq = jQuery.noConflict();
 imgArr = ["/manu3555/dziMS003555_000_COVER_FRONT.xml",
         "/manu3555/dziMS003555_001b.xml",
         "/manu3555/dziMS003555_002a.xml",
@@ -9,21 +10,15 @@ imgArr = ["/manu3555/dziMS003555_000_COVER_FRONT.xml",
         "/manu3555/dziMS003555_005b.xml",];
 var viewer = OpenSeadragon({
       id: "openseadragon",
-      //smoothTileEdgesMinZoom: 1,
       zoomInButton:     "zoominbttn",
       zoomOutButton:    "zoomoutbttn",
       homeButton:       "homebttn",
-      //  fullPageButton: "fullscrnbttn",
-      //  visibilityRatio: 2.0,
-      //  constrainDuringPan: true,
       minZoomImageRatio:  1,
       maxZoomPixelRatio:  1,
       nextButton:         "nextbttn",
       previousButton:     "previousbttn",
       tileSources:        imgArr,
       sequenceMode:       true,
-      //showReferenceStrip: true,
-      //prefixUrl: "/openseadragon/images/",
   });
   viewer.canvas.style.backgroundColor = "#2D2D2D";
   //for thumbbar.js
@@ -88,5 +83,20 @@ goToPage = function(){
   if(jumptopage != currentPg && jumptopage >= 0 && jumptopage < pageSum && pageSum>0){
       viewer.goToPage(parseInt(jumptopage)-1);
   }
+  jq("#menuUl").slideToggle("slow");
 }
 jumpToPageButton.addEventListener("click", goToPage);
+
+// menu control for handhelds screen width max 500px
+menuToggle = document.getElementById("menuToggle");
+
+jq("document").ready(function(){
+  jq("#menuUl").hide();
+  jq("#menuToggle").click(function(){
+    console.log("fired toggle");
+    jq("#menuUl").slideToggle("slow");
+  });
+  jq("#fullscrnbttn, #homebttn").click(function(){
+      jq("#menuUl").slideToggle("slow");
+  });
+});

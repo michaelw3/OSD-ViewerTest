@@ -21,6 +21,8 @@
         showNavigator:          false,
         showNavigationControl:  false,
         constrainDuringPan: true,
+        gestureSettingsMouse :{clickToZoom : false, dblClickToZoom: false},
+        gestureSettingsTouch :{pinchToZoom : false, scrollToZoom: false, dblClickToZoom: false}, 
       });
       thumbbarViever.canvas.style.backgroundColor = "#2D2D2D";
       imgSrcLength = this.imageSource.length;
