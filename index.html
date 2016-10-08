@@ -33,7 +33,12 @@
     text-decoration: none; ;cursor: pointer; background-color: #898989}
     #currentpage{width: 100%; height: 10%; display: block;}
     #menuToggle{ display: none}
-    @media screen and (max-width: 700px){
+    #jumptopageForm {
+      position: relative;
+      display: inline-block;
+      top: 0;
+    }
+    @media screen and (max-width: 550px){
       #previousbttn, #nextbttn, #zoominbttn, #zoomoutbttn{display: none !important}
       #navigationcontrol{
 
@@ -83,8 +88,13 @@
         <li id="zoominbttn">ZOOM IN</li>
         <li id="zoomoutbttn">ZOOM OUT</li>
         <li id="fullscrnbttn">FULLSCREEN</li>
-        <li id="homebttn">HOME</li>
-        <li><input id="jumptopage" name="jumptopage" placeholder="go to page"/><button type="button" id="jumptopagebutton">GO</button></li>
+        <li id="homeli"><span id="homebttn">HOME</span></li>
+        <li>
+          <form id="jumptopageForm">
+          <input id="jumptopage" type="number" name="jumptopage" placeholder="go to page"/>
+          <input type="submit" id="jumptopagebutton" value="Go"/>
+        </form>
+        </li>
       </ul>
     </nav>
     <div id="viewerwrapper">

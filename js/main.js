@@ -57,9 +57,11 @@ navfunction = function (option){
     lastPage = imgArr.length;
     if(option == "next" && currentPg < lastPage){
       viewer.goToPage(currentPg +1);
+      thumbViewer.scrollToThumb(currentPg +1);
     }
     if(option == "prev" && currentPg >0){
         viewer.goToPage(currentPg -1);
+        thumbViewer.scrollToThumb(currentPg -1);
     }
 }
 
@@ -74,29 +76,46 @@ sidePrevButton.addEventListener("click", function(){
 });
 // go to page control
 
-jumpToPageButton = document.getElementById("jumptopagebutton");
+jumpToPageForm = document.getElementById("jumptopageForm");
 //checks if pages exists and jumps to it if it is not already shown
-goToPage = function(){
+goToPage = function(e){
+  if (e.preventDefault) {
+       e.preventDefault();
+    }
+    e.returnValue = false; // for IE
   currentPg = viewer.currentPage();
-  jumptopage = document.getElementById("jumptopage").value;
+  jumptopage = (document.getElementById("jumptopage").value -1);
+  console.log(jumptopage);
   pageSum = imgArr.length;
   if(jumptopage != currentPg && jumptopage >= 0 && jumptopage < pageSum && pageSum>0){
-      viewer.goToPage(parseInt(jumptopage)-1);
+      viewer.goToPage(jumptopage);
+      thumbViewer.scrollToThumb(jumptopage);
   }
-  jq("#menuUl").slideToggle("slow");
+  if(jq(document).width() <= "550"){
+      jq("#menuUl").slideToggle("slow");
+  }
 }
-jumpToPageButton.addEventListener("click", goToPage);
+jumpToPageForm.addEventListener('submit', goToPage, false);
 
 // menu control for handhelds screen width max 500px
 menuToggle = document.getElementById("menuToggle");
 
 jq("document").ready(function(){
-  jq("#menuUl").hide();
-  jq("#menuToggle").click(function(){
-    console.log("fired toggle");
+  function toggleMenuClick(){
     jq("#menuUl").slideToggle("slow");
-  });
-  jq("#fullscrnbttn, #homebttn").click(function(){
-      jq("#menuUl").slideToggle("slow");
-  });
+  }
+  if(jq(document).width() <= "550"){
+
+    jq("#menuUl").hide();
+      jq("#menuToggle").on('click',function(){
+        toggleMenuClick();
+      });
+      jq("#fullscrnbttn").on('click' ,function(){
+        toggleMenuClick();
+      });
+      jq("#homeli").on('click' ,function(){
+        toggleMenuClick();
+      });
+    }
+    console.log(jq(document).width());
 });

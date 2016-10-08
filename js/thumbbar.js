@@ -12,7 +12,7 @@
       console.log(this.thumbviewerID);
 
       self.setPosition(this.position);
-      thumbbarViever = new OpenSeadragon({
+      thumbbarViewer = new OpenSeadragon({
         id : this.thumbviewerID,
         panVertical : false,
         panHorizontal: true,
@@ -20,16 +20,16 @@
         maxZoomLevel: 1,
         showNavigator:          false,
         showNavigationControl:  false,
-        constrainDuringPan: true,
+        constrainDuringPan: false,
         gestureSettingsMouse :{clickToZoom : false, dblClickToZoom: false},
-        gestureSettingsTouch :{pinchToZoom : false, scrollToZoom: false, dblClickToZoom: false}, 
+        gestureSettingsTouch :{pinchToZoom : false, scrollToZoom: false, dblClickToZoom: false},
       });
-      thumbbarViever.canvas.style.backgroundColor = "#2D2D2D";
+      thumbbarViewer.canvas.style.backgroundColor = "#2D2D2D";
       imgSrcLength = this.imageSource.length;
       console.log(imgSrcLength);
       for(i=0; i < imgSrcLength; i++){
           console.log(this.imageSource[i]);
-        thumbbarViever.addTiledImage({
+        thumbbarViewer.addTiledImage({
             tileSource: this.imageSource[i],
             index: i,
             opacity : 1,
@@ -37,26 +37,12 @@
              height: 1,
         });
       }
-      // var  tiledImage;
-      //thumbbarViever.open(this.imageSource);
-      // thumbbarViever.world.arrange({rows:1,
-      //   immediately : true,
-      //   layout : "horizontal",
-      // });
-      //thumbbarViever.world.draw();
-      thumbbarViever.innerTracker.scrollHandler=false;
-      var count = thumbbarViever.world.getItemCount();
-      console.log("Count = " + count);
-      // for (i = 0; i < count; i++) {
-      //   tiledImage = thumbbarViever.world.getItemAt(i);
-      //   tiledImage.setPosition(new OpenSeadragon.Point(i, 0));
-      // }
-      self.showControls();
-      thumbbarViever.addHandler('canvas-click', function(event) {
-          self.setImageMain(event);
-          if (!event.quick) {
+      thumbbarViewer.innerTracker.scrollHandler=false;
 
-              return;
+      self.showControls();
+      thumbbarViewer.addHandler('canvas-click', function(event) {
+          if (event.quick) {
+              self.setImageMain(event);
           }
         });
    }
@@ -80,9 +66,8 @@
         }
       },
       showControls : function(){
-        width = "25px";
+        width = "30px";
         height = "100%";
-        //console.log("Viewer inside showControls : "+ thumbbarViever.element);
         leftControlButton = $.makeNeutralElement("div");
         this.thumbbarDiv.appendChild(leftControlButton);
         leftControlButton.id = "thumbbarControlLeft";
@@ -91,37 +76,50 @@
         leftControlButton.style.position = "absolute";
         leftControlButton.style.top = 0;
         leftControlButton.style.left = 0;
-        leftControlButton.style.backgroundColor = "rgba(233, 233, 233, 0.1)";
+        leftControlButton.style.backgroundColor = "rgba(233, 233, 233, 0.3)";
         leftControlButton.style.zIndex = "99999";
-        leftControlArrow = $.makeNeutralElement("div");
+        leftControlArrow = $.makeNeutralElement("img");
         leftControlButton.appendChild(leftControlArrow);
+        leftControlArrow.src ="js/left-arrow.png";
+        leftControlArrow.style.position = "relative";
+        leftControlArrow.style.left = "5px";
+        leftControlArrow.style.top = "37%";
       },
       setImageMain : function(event){
         console.log("inside setImageMain");
-        var index =   self.getImagePosition(thumbbarViever.viewport.pointFromPixel(event.position));
+        var index =   self.getImagePosition(thumbbarViewer.viewport.pointFromPixel(event.position));
         console.log("inside setImageMain index: " + index);
         if (index !== -1) {
-            thumbbarViever.viewport.fitBounds(thumbbarViever.world.getItemAt(index).getBounds());
+            thumbbarViewer.viewport.fitBounds(thumbbarViewer.world.getItemAt(index).getBounds());
             this.mainViewer.goToPage(index);
         }
       },
       getImagePosition : function(position){
-        console.log("inside getImagePosition " + position);
         var box;
-        var count = thumbbarViever.world.getItemCount();
+        var count = thumbbarViewer.world.getItemCount();
         for (var i = 0; i < count; i++) {
-            box = thumbbarViever.world.getItemAt(i).getBounds();
+            box = thumbbarViewer.world.getItemAt(i).getBounds();
             if (position.x > box.x &&
                     position.y > box.y &&
                     position.x < box.x + box.width &&
                     position.y < box.y + box.height) {
-                        console.log("inside getImagePosition i =" + i);
                 return i;
             }
         }
 
         return -1;
       },
+      scrollLeft : function(){
+
+      },
+      scrolRight : function(){
+
+      },
+      scrollToThumb : function(index){
+        position =  thumbbarViewer.world.getItemAt(index).getBounds().getCenter();
+        thumbbarViewer.viewport.panTo(position, true);
+      },
+
   }
 
 })(OpenSeadragon);
