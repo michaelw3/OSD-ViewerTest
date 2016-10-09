@@ -101,28 +101,23 @@ jumpToPageForm.addEventListener('submit', goToPage, false);
 menuToggle = document.getElementById("menuToggle");
 
 jq("document").ready(function(){
+  var windowWidth;
   function toggleMenuClick(){
-    jq("#menuUl").slideToggle("slow");
+     windowWidth = jq(window).width();
+    if(windowWidth <= "680"){
+      jq("#menuUl").slideToggle("slow");
+    }
+  }
+  windowWidth = jq(window).width();
+  if(windowWidth <= "680"){
+    jq("#menuUl").hide();
+    jq("#menuToggle ,#fullscrnbttn, #homeli").on('click',toggleMenuClick);
+
+  }
+  else{
+      jq("#menuUl").show();
+      jq("#menuToggle, #fullscrnbttn, #homeli").off('click',toggleMenuClick);
   }
 
-    jq(window).resize(function() {
-      if(jq(document).width() <= "680"){
-
-        jq("#menuUl").hide();
-          jq("#menuToggle").on('click',function(){
-            toggleMenuClick();
-          });
-          jq("#fullscrnbttn").on('click' ,function(){
-            toggleMenuClick();
-          });
-          jq("#homeli").on('click' ,function(){
-            toggleMenuClick();
-          });
-        }
-        else{
-          jq("#menuUl").show();
-        }
-          console.log("rezise");
-    });
     console.log(jq(document).width());
 });
