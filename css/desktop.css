@@ -1,0 +1,21 @@
+#navigationcontrol ul {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        }
+ul li {
+        display: inline;
+        margin-right:0;
+        color: white;
+        text-align: center;
+        padding: 0.3em 0.3em;
+        text-decoration: none;
+        cursor: pointer;
+        background-color: #898989
+        }
+#currentpage{
+              width: 100%;
+              height: 10%;
+              display: block;
+              }
+#menuToggle{ display: none}

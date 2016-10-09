@@ -1,0 +1,35 @@
+#previousbttn, #nextbttn, #zoominbttn, #zoomoutbttn{display: none !important}
+#navigationcontrol{
+
+    width:100%;
+    position :relative;
+    top: 0;
+    right: 0;
+      z-index: 888;
+}
+#menuToggle{
+  height:28px;
+  display: inline;
+}
+#menuUl{
+  background-color: #898989
+  display: inline-block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  right:0;
+  top:0;
+    z-index: 9999;
+  }
+ul li {
+  line-height: 1.5em;
+  margin: 0;
+  border-top:1px solid black;
+  width: 100%;
+  display: inline-block;
+  font-size: small;
+  text-align: center;
+  clear: right;
+  z-index: 999999;
+}

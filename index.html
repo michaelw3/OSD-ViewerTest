@@ -3,80 +3,9 @@
 <head>
 <title>Viewer test</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    * {margin: 0; padding: 0}
-    html { height: 100%; }
-    body { height: 100%; }
-    #viewercontainer {width: 100%; height: 100%;}
-    #viewerwrapper {width: 100%; height: 80%; position:relative; top:0;}
-    #openseadragon {width:100%; height:100%; z-index: -1;}
-    #leftarrow {width:25px; height:100%; position: absolute; left: 0; top :0;z-index: 1;}
-    .sidenavwrapperleft{width:25px; height:100%; position: absolute; left: 0; top :0;}
-    #leftarrow > img {width: 15px; position: absolute; top: 45%; left:3px; z-index: 999; }
-    #rightarrow > img { width: 15px; position: absolute; top: 45%; right:3px; z-index: 999;}
-    #rightarrow {width:25px; height:100%; position: absolute; right:0; top :0;z-index: 1;}
-    .sidenavwrapperright{width:25px; height:100%; position: absolute; right:0; top :0;}
-    .sidenav {  cursor: pointer;
-                background-color: rgba(0, 0, 0, 0);
-                -webkit-transition: background-color 0.5s; /* Safari 3.1 to 6.0 */
-                transition: background-color 0.5s;}
-    .sidenavwrapperleft:hover .sidenav, .sidenavwrapperright:hover .sidenav{background-color: rgba(44, 44, 44, 0.1); }
-    .sidenavimg {opacity:0.3;
-                -webkit-transition: opacity 0.5s; /* Safari 3.1 to 6.0 */
-                transition: opacity 0.5s;}
-    .sidenavwrapperleft:hover .sidenavimg, .sidenavwrapperright:hover .sidenavimg{opacity: 1;}
-    #navigationcontrol {direction:rtl; height:2em; background-color: #2D2D2D}
-    #navigationcontrol ul {list-style: none; margin: 0; padding: 0;}
-    ul li {display: inline; margin-right:0;color: white;
-    text-align: center;
-    padding: 0.3em 0.3em;
-    text-decoration: none; ;cursor: pointer; background-color: #898989}
-    #currentpage{width: 100%; height: 10%; display: block;}
-    #menuToggle{ display: none}
-    #jumptopageForm {
-      position: relative;
-      display: inline-block;
-      top: 0;
-    }
-    @media screen and (max-width: 550px){
-      #previousbttn, #nextbttn, #zoominbttn, #zoomoutbttn{display: none !important}
-      #navigationcontrol{
-
-          width:100%;
-          position :relative;
-          top: 0;
-          right: 0;
-            z-index: 888;
-      }
-      #menuToggle{
-        height:28px;
-        display: inline;
-      }
-      #menuUl{
-        background-color: #898989
-        display: inline-block;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        position: relative;
-        right:0;
-        top:0;
-          z-index: 9999;
-        }
-      ul li {
-        line-height: 1.5em;
-        margin: 0;
-        border-top:1px solid black;
-        width: 100%;
-        display: inline-block;
-        font-size: small;
-        text-align: center;
-        clear: right;
-        z-index: 999999;
-      }
-
-    }
-</style>
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" media="(max-width: 680px)" href=css/"mobile.css" />
+<link rel="stylesheet" media="(min-width: 681px)" href="css/desktop.css" />
 </head>
 <body>
   <div id="viewercontainer">

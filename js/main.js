@@ -104,18 +104,25 @@ jq("document").ready(function(){
   function toggleMenuClick(){
     jq("#menuUl").slideToggle("slow");
   }
-  if(jq(document).width() <= "550"){
 
-    jq("#menuUl").hide();
-      jq("#menuToggle").on('click',function(){
-        toggleMenuClick();
-      });
-      jq("#fullscrnbttn").on('click' ,function(){
-        toggleMenuClick();
-      });
-      jq("#homeli").on('click' ,function(){
-        toggleMenuClick();
-      });
-    }
+    jq(window).resize(function() {
+      if(jq(document).width() <= "680"){
+
+        jq("#menuUl").hide();
+          jq("#menuToggle").on('click',function(){
+            toggleMenuClick();
+          });
+          jq("#fullscrnbttn").on('click' ,function(){
+            toggleMenuClick();
+          });
+          jq("#homeli").on('click' ,function(){
+            toggleMenuClick();
+          });
+        }
+        else{
+          jq("#menuUl").show();
+        }
+          console.log("rezise");
+    });
     console.log(jq(document).width());
 });
