@@ -25,6 +25,7 @@ var viewer = OpenSeadragon({
 var thumbViewer = new OpenSeadragon.Thumbbar({id: "thumbbar",
     mainviewer : viewer,
     position : "bottom",
+    direction : "RTL",
 });
 var sumOfPages = imgArr.length;
 document.getElementById("currentpage").innerHTML = "1" + " of " + sumOfPages;
