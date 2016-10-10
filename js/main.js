@@ -25,7 +25,7 @@ var viewer = OpenSeadragon({
 var thumbViewer = new OpenSeadragon.Thumbbar({id: "thumbbar",
     mainviewer : viewer,
     position : "bottom",
-    direction : "RTL",
+    direction : "rtl",
 });
 var sumOfPages = imgArr.length;
 document.getElementById("currentpage").innerHTML = "1" + " of " + sumOfPages;
@@ -58,11 +58,11 @@ navfunction = function (option){
     lastPage = imgArr.length;
     if(option == "next" && currentPg < lastPage){
       viewer.goToPage(currentPg +1);
-      thumbViewer.scrollToThumb(currentPg +1);
+      //thumbViewer.scrollToThumb(currentPg +1);
     }
     if(option == "prev" && currentPg >0){
         viewer.goToPage(currentPg -1);
-        thumbViewer.scrollToThumb(currentPg -1);
+      //  thumbViewer.scrollToThumb(currentPg -1);
     }
 }
 
@@ -90,7 +90,7 @@ goToPage = function(e){
   pageSum = imgArr.length;
   if(jumptopage != currentPg && jumptopage >= 0 && jumptopage < pageSum && pageSum>0){
       viewer.goToPage(jumptopage);
-      thumbViewer.scrollToThumb(jumptopage);
+      //thumbViewer.scrollToThumb(jumptopage);
   }
   if(jq(document).width() <= "550"){
       jq("#menuUl").slideToggle("slow");
@@ -113,7 +113,7 @@ jq("document").ready(function(){
   if(windowWidth <= "680"){
     jq("#menuUl").hide();
     jq("#menuToggle ,#fullscrnbttn, #homeli").on('click',toggleMenuClick);
-
+    thumbViewer.hideControls();
   }
   else{
       jq("#menuUl").show();
