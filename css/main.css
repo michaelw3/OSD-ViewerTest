@@ -100,6 +100,14 @@ ul li{
                       height:2em;
                       background-color: #2D2D2D
                       }
+#currentpage{
+              display: inline-block;
+              width: 100%;
+              background-color: #2D2D2D;
+              font-size: medium;
+              color: white;
+              text-align: center;
+}
 #jumptopageForm {
                   position: relative;
                   display: inline-block;

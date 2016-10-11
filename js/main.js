@@ -1,4 +1,5 @@
 var jq = jQuery.noConflict();
+
 imgArr = ["/manu3555/dziMS003555_000_COVER_FRONT.xml",
         "/manu3555/dziMS003555_001b.xml",
         "/manu3555/dziMS003555_002a.xml",
@@ -12,7 +13,7 @@ var viewer = OpenSeadragon({
       id: "openseadragon",
       zoomInButton:     "zoominbttn",
       zoomOutButton:    "zoomoutbttn",
-      homeButton:       "homebttn",
+      //homeButton:       "homebttn",
       minZoomImageRatio:  1,
       maxZoomPixelRatio:  1,
       nextButton:         "nextbttn",
@@ -34,7 +35,21 @@ viewer.addHandler("page", function (data) {
 
       document.getElementById("currentpage").innerHTML = ( parseInt(data.page) + 1 ) + " of " + sumOfPages;
 });
-
+function toggleMenuClick(){
+   windowWidth = jq(window).width();
+  if(windowWidth <= "680"){
+    jq("#menuUl").slideToggle("slow");
+  }
+}
+//trigger goHome function of MainViewer
+var homeButton = document.getElementById("homebttn");
+triggerGoHome = function(){
+  console.log("insied triggerGoHome-");
+  console.log(viewer);
+  viewer.viewport.goHome(false);
+  toggleMenuClick();
+}
+homeButton.addEventListener('click',triggerGoHome);
 // toggle fullscreen
 toggleFullScreen = function(){
   viewerContainer = document.getElementById("viewercontainer");
@@ -103,16 +118,11 @@ menuToggle = document.getElementById("menuToggle");
 
 jq("document").ready(function(){
   var windowWidth;
-  function toggleMenuClick(){
-     windowWidth = jq(window).width();
-    if(windowWidth <= "680"){
-      jq("#menuUl").slideToggle("slow");
-    }
-  }
+
   windowWidth = jq(window).width();
   if(windowWidth <= "680"){
     jq("#menuUl").hide();
-    jq("#menuToggle ,#fullscrnbttn, #homeli").on('click',toggleMenuClick);
+    jq("#menuToggle ,#fullscrnbttn").on('click',toggleMenuClick);
     thumbViewer.hideControls();
   }
   else{

@@ -23,12 +23,12 @@
     z-index: 99999;
   }
 ul li {
-  line-height: 1.5em;
+  line-height: 2.5em;
   margin: 0;
   border-top:1px solid black;
   width: 100%;
   display: inline-block;
-  font-size: small;
+  font-size: medium;
   text-align: center;
   clear: right;
   z-index: 999999;
