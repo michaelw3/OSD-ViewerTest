@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Viewer test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" media="screen and (max-width: 680px)" href="css/mobile.css" />
+<link rel="stylesheet" media="screen and (min-width: 681px)" href="css/desktop.css" />
+</head>
+<body>
+  <div id="viewercontainer">
+    <nav id="navigationcontrol">
+      <img id="menuToggle" src="menu.png"/>
+      <ul id="menuUl">
+        <li id="previousbttn">PREV</li>
+        <li id="nextbttn">NEXT</li>
+        <li id="zoominbttn">ZOOM IN</li>
+        <li id="zoomoutbttn">ZOOM OUT</li>
+        <li id="fullscrnbttn">FULLSCREEN</li>
+        <li id="homebttn">HOME</li>
+        <li>
+          <form id="jumptopageForm">
+          <input id="jumptopage" type="number" name="jumptopage" placeholder="go to page"/>
+          <input type="submit" id="jumptopagebutton" value="Go"/>
+        </form>
+        </li>
+      </ul>
+    </nav>
+    <div id="viewerwrapper">
+        <div id="openseadragon"></div>
+          <span id="currentpage"></span>
+        <div id="thumbbar"></div>
+        <span class="sidenavwrapperleft">
+            <nav id="leftarrow" class="sidenav">
+              <img src="left-arrow.png" class="sidenavimg">
+            </nav>
+        </span>
+        <span class="sidenavwrapperright">
+          <nav id="rightarrow" class="sidenav">
+            <img src="right-arrow.png" class="sidenavimg">
+          </nav>
+        </span>
+
+      </div>
+  </div>
+  <script src="openseadragon/openseadragon.js"></script>
+  <script src="js/thumbbar.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

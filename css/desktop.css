@@ -1,0 +1,17 @@
+
+ul li {
+        display: inline;
+        text-align: center;
+        padding: 0.3em 0.3em;
+
+        }
+#currentpage{
+              width: 100%;
+              height: 10%;
+              display: block;
+              }
+#menuToggle{ display: none}
+
+#menuUl {
+  display: block;
+}
